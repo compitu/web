@@ -1,5 +1,6 @@
 import {HttpClient} from '@angular/common/http';
 import {Component} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from 'src/app/core/authentication/auth.service';
 
 @Component({
@@ -13,11 +14,16 @@ export class LoginComponent {
         private authService: AuthService
     ) {}
 
-    public onLoginClick(): void {
+    public loginForm: FormGroup = new FormGroup({
+        email: new FormControl('', [Validators.required, Validators.email]),
+        password: new FormControl('', [Validators.required]),
+    });
+
+    public onLoginSubmit(): void {
         this.http
             .post<{access: string; refresh: string}>('/api/auth/login', {
-                email: 'test@test.com',
-                password: 'test',
+                email: this.loginForm.controls.email.value,
+                password: this.loginForm.controls.password.value,
             })
             .subscribe(tokens => this.authService.storeTokens(tokens));
     }

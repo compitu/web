@@ -1,2 +1,22 @@
-<p>login works!</p>
-<button (click)="onLoginClick()">Login</button>
+<form novalidate [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
+
+    <mat-form-field appearance="outline">
+        <mat-label>E-mail</mat-label>
+        <input matInput formControlName="email">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput formControlName="password" />
+    </mat-form-field>
+
+    <button
+        mat-flat-button
+        color="primary"
+        type="submit"
+        [disabled]="!loginForm.valid"
+    >
+        Login
+    </button>
+
+</form>
