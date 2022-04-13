@@ -2,6 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
+import {LoginPayload} from './login-payload';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
@@ -29,6 +30,13 @@ export class AuthService {
 
     public getRefreshToken(): string {
         return localStorage.getItem('refresh') as string;
+    }
+
+    public login(email: string, password: string): Observable<LoginPayload> {
+        return this.http.post<LoginPayload>('/api/auth/login', {
+            email,
+            password,
+        });
     }
 
     public logout(): void {

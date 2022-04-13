@@ -1,7 +1,9 @@
 import {HttpClient} from '@angular/common/http';
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Store} from '@ngrx/store';
 import {AuthService} from 'src/app/core/authentication/auth.service';
+import {loginFormSubmit} from './login.actions';
 
 @Component({
     selector: 'app-login',
@@ -11,7 +13,8 @@ import {AuthService} from 'src/app/core/authentication/auth.service';
 export class LoginComponent {
     public constructor(
         private http: HttpClient,
-        private authService: AuthService
+        private authService: AuthService,
+        private store: Store
     ) {}
 
     public loginForm: FormGroup = new FormGroup({
@@ -20,11 +23,17 @@ export class LoginComponent {
     });
 
     public onLoginSubmit(): void {
-        this.http
+        this.store.dispatch(
+            loginFormSubmit({
+                email: this.loginForm.controls.email.value,
+                password: this.loginForm.controls.password.value,
+            })
+        );
+        /*this.http
             .post<{access: string; refresh: string}>('/api/auth/login', {
                 email: this.loginForm.controls.email.value,
                 password: this.loginForm.controls.password.value,
             })
-            .subscribe(tokens => this.authService.storeTokens(tokens));
+            .subscribe(tokens => this.authService.storeTokens(tokens));*/
     }
 }
