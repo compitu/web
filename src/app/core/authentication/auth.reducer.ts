@@ -1,5 +1,8 @@
 import {createFeature, createReducer, on} from '@ngrx/store';
-import {loginPayloadFetchSuccess} from './auth.effects.actions';
+import {
+    initUserFetchSuccess,
+    loginPayloadFetchSuccess,
+} from './auth.effects.actions';
 
 export interface AuthState {
     user:
@@ -20,6 +23,9 @@ export const authFeature = createFeature({
         initialState,
         on(loginPayloadFetchSuccess, (state, {payload}): AuthState => {
             return {...state, user: payload.user};
+        }),
+        on(initUserFetchSuccess, (state, {user}): AuthState => {
+            return {...state, user};
         })
     ),
 });

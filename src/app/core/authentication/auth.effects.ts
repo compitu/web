@@ -1,9 +1,13 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType, OnInitEffects} from '@ngrx/effects';
 import {Action, createAction, Store} from '@ngrx/store';
-import {map, switchMap} from 'rxjs';
+import {catchError, map, of, switchMap, tap} from 'rxjs';
 import {loginFormSubmit} from '../../modules/login/login.actions';
-import {loginPayloadFetchSuccess} from './auth.effects.actions';
+import {
+    initUserFetchFail,
+    initUserFetchSuccess,
+    loginPayloadFetchSuccess,
+} from './auth.effects.actions';
 import {AuthService} from './auth.service';
 
 const onInit = createAction('[AuthEffect]: Init');
@@ -31,6 +35,40 @@ export class AuthEffects implements OnInitEffects {
             return this.actions$.pipe(
                 ofType(loginPayloadFetchSuccess),
                 map(({payload}) => this.authService.storeTokens(payload))
+            );
+        },
+        {dispatch: false}
+    );
+
+    public storeUser$ = createEffect(
+        () => {
+            return this.actions$.pipe(
+                ofType(loginPayloadFetchSuccess),
+                map(({payload}) => this.authService.stroreUser(payload.user))
+            );
+        },
+        {dispatch: false}
+    );
+
+    public fetchUserOnInit$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(onInit),
+            switchMap(() =>
+                this.authService.getUser().pipe(
+                    map(user => initUserFetchSuccess({user})),
+                    catchError(() => of(initUserFetchFail()))
+                )
+            )
+        );
+    });
+
+    public handleUserFetchFail$ = createEffect(
+        () => {
+            return this.actions$.pipe(
+                ofType(initUserFetchFail),
+                tap(() => {
+                    this.authService.logout();
+                })
             );
         },
         {dispatch: false}

@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {LoginPayload} from './login-payload';
+import {User} from './user';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
@@ -24,6 +25,10 @@ export class AuthService {
         localStorage.setItem('refresh', tokens.refresh);
     }
 
+    public stroreUser(user: User): void {
+        localStorage.setItem('user', JSON.stringify(user));
+    }
+
     public getAccessToken(): string {
         return localStorage.getItem('access') as string;
     }
@@ -42,6 +47,13 @@ export class AuthService {
     public logout(): void {
         localStorage.removeItem('access');
         localStorage.removeItem('refresh');
+        localStorage.removeItem('user');
         this.router.navigateByUrl('/login');
+    }
+
+    public getUser(): Observable<User | undefined> {
+        const userString = localStorage.getItem('user');
+        const user = userString ? (JSON.parse(userString) as User) : undefined;
+        return this.http.get<User>(`api/users/${user?.id}`);
     }
 }
