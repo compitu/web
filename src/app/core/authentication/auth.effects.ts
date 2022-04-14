@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
 import {Actions, createEffect, ofType, OnInitEffects} from '@ngrx/effects';
 import {Action, createAction, Store} from '@ngrx/store';
 import {catchError, map, of, switchMap, tap} from 'rxjs';
@@ -17,7 +18,8 @@ export class AuthEffects implements OnInitEffects {
     public constructor(
         private store: Store,
         private actions$: Actions,
-        private authService: AuthService
+        private authService: AuthService,
+        private router: Router
     ) {}
 
     public login$ = createEffect(() => {
@@ -68,6 +70,18 @@ export class AuthEffects implements OnInitEffects {
                 ofType(initUserFetchFail),
                 tap(() => {
                     this.authService.logout();
+                })
+            );
+        },
+        {dispatch: false}
+    );
+
+    public redirectToHome$ = createEffect(
+        () => {
+            return this.actions$.pipe(
+                ofType(loginPayloadFetchSuccess),
+                tap(() => {
+                    this.router.navigateByUrl('');
                 })
             );
         },
