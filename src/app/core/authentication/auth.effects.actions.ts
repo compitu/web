@@ -15,3 +15,8 @@ export const initUserFetchSuccess = createAction(
 export const initUserFetchFail = createAction(
     '[Auth Service] Init User fetch fail'
 );
+
+export const signupSuccess = createAction(
+    '[Auth Service] Signup Payload fetch success',
+    props<{email: string; password: string}>()
+);

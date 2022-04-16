@@ -50,7 +50,7 @@ export class AuthInterceptor implements HttpInterceptor {
                     throw err;
                 }
                 // if error has status neither 401 nor 403 then just return this error
-                throw new Error(err);
+                throw err;
             })
         );
     }
@@ -73,6 +73,11 @@ export class AuthInterceptor implements HttpInterceptor {
                     return next.handle(
                         this.addAuthHeader(request, tokens.access)
                     );
+                }),
+                catchError(err => {
+                    this.refreshingInProgress = false;
+                    this.accessTokenSubject.error('Token expired.');
+                    throw err;
                 })
             );
         } else {

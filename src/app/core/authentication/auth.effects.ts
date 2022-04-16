@@ -4,10 +4,12 @@ import {Actions, createEffect, ofType, OnInitEffects} from '@ngrx/effects';
 import {Action, createAction, Store} from '@ngrx/store';
 import {catchError, map, of, switchMap, tap} from 'rxjs';
 import {loginFormSubmit} from '../../modules/login/login.actions';
+import {signupFormSubmit} from '../../modules/sign-up/signup.actions';
 import {
     initUserFetchFail,
     initUserFetchSuccess,
     loginPayloadFetchSuccess,
+    signupSuccess,
 } from './auth.effects.actions';
 import {AuthService} from './auth.service';
 
@@ -24,7 +26,7 @@ export class AuthEffects implements OnInitEffects {
 
     public login$ = createEffect(() => {
         return this.actions$.pipe(
-            ofType(loginFormSubmit),
+            ofType(loginFormSubmit, signupSuccess),
             switchMap(action =>
                 this.authService.login(action.email, action.password)
             ),
@@ -56,25 +58,13 @@ export class AuthEffects implements OnInitEffects {
         return this.actions$.pipe(
             ofType(onInit),
             switchMap(() =>
-                this.authService.getUser().pipe(
+                this.authService.fetchUser().pipe(
                     map(user => initUserFetchSuccess({user})),
                     catchError(() => of(initUserFetchFail()))
                 )
             )
         );
     });
-
-    public handleUserFetchFail$ = createEffect(
-        () => {
-            return this.actions$.pipe(
-                ofType(initUserFetchFail),
-                tap(() => {
-                    this.authService.logout();
-                })
-            );
-        },
-        {dispatch: false}
-    );
 
     public redirectToHome$ = createEffect(
         () => {
@@ -87,6 +77,21 @@ export class AuthEffects implements OnInitEffects {
         },
         {dispatch: false}
     );
+
+    public signup$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(signupFormSubmit),
+            switchMap(action =>
+                this.authService.signup(action.email, action.password).pipe(
+                    map(() => ({
+                        email: action.email,
+                        password: action.password,
+                    }))
+                )
+            ),
+            map(({email, password}) => signupSuccess({email, password}))
+        );
+    });
 
     public ngrxOnInitEffects(): Action {
         return onInit();

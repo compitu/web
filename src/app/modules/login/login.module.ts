@@ -12,9 +12,7 @@ import {LoginComponent} from './login.component';
     imports: [
         CommonModule,
         ReactiveFormsModule,
-
         LoginRoutingModule,
-
         MatFormFieldModule,
         MatInputModule,
         MatIconModule,

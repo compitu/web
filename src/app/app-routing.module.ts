@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {StoreRouterConnectingModule} from '@ngrx/router-store';
+import {AuthGuard} from './core/authentication/auth-guard';
 import {HomeComponent} from './modules/home/home.component';
 
 const routes: Routes = [
@@ -19,7 +20,7 @@ const routes: Routes = [
     {
         path: '',
         component: HomeComponent,
-        canActivate: [],
+        canActivate: [AuthGuard],
     },
 ];
 
