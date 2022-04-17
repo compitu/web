@@ -3,8 +3,14 @@ import {RouterModule, Routes} from '@angular/router';
 import {StoreRouterConnectingModule} from '@ngrx/router-store';
 import {AuthGuard} from './core/authentication/auth-guard';
 import {HomeComponent} from './modules/home/home.component';
+import {NotFoundComponent} from './modules/not-found/not-found.component';
 
 const routes: Routes = [
+    {
+        path: '',
+        component: HomeComponent,
+        canActivate: [AuthGuard],
+    },
     {
         path: 'login',
         loadChildren: () =>
@@ -17,11 +23,7 @@ const routes: Routes = [
                 m => m.SignUpModule
             ),
     },
-    {
-        path: '',
-        component: HomeComponent,
-        canActivate: [AuthGuard],
-    },
+    {component: NotFoundComponent, path: '**'},
 ];
 
 @NgModule({
