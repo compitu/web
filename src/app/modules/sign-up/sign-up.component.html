@@ -1,4 +1,10 @@
-<form novalidate [formGroup]="signUpForm" (ngSubmit)="onSignUpSubmit()">
+<form novalidate [formGroup]="signUpForm" (ngSubmit)="onSignUpSubmit()" class="sign-up-form mat-elevation-z24">
+
+    <img
+        src="../../../assets/images/logo-gradient.svg"
+        class="logo"
+        alt="compitu logo"
+    />
 
     <mat-form-field appearance="outline">
         <mat-label>E-mail</mat-label>
@@ -18,5 +24,7 @@
     >
         Sign up
     </button>
+
+    <div class="login-text">Already have an account? <a [routerLink]="['/login']">Log in</a></div>
 
 </form>

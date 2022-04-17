@@ -7,14 +7,14 @@
     $foreground-palette: map.get($color-config, 'foreground');
     $primary-palette: map.get($color-config, 'primary');
 
-    app-login {
+    app-sign-up {
         background-color: mat.get-color-from-palette(
             $background-palette,
             background
         );
     }
 
-    .login-form {
+    .sign-up-form {
         background-color: mat.get-color-from-palette($background-palette, card);
     }
 
@@ -22,7 +22,7 @@
         color: mat.get-color-from-palette($foreground-palette, text);
     }
 
-    .signup-text a {
+    .login-text a {
         color: mat.get-color-from-palette($primary-palette, 600);
     }
 }

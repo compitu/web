@@ -1,0 +1,33 @@
+@use 'variables' as *;
+
+:host {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.sign-up-form {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    align-self: center;
+    padding: $space-4xl $space-3xl;
+    border-radius: $border-radius-default;
+}
+
+.logo {
+    width: 140px;
+    align-self: center;
+    margin-bottom: $space-3xl;
+}
+
+.title {
+    align-self: center;
+    font-weight: bold;
+}
+
+.login-text {
+    margin-top: $space-3xl;
+    align-self: center;
+}

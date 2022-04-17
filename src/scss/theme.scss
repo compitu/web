@@ -3,6 +3,7 @@
 
 // Component themes
 @use './src/app/modules/login/login.component.theme' as login;
+@use './src/app/modules/sign-up/sign-up.component.theme' as signup;
 
 // Variables
 @use 'variables' as *;
@@ -94,7 +95,7 @@ $light-theme-foreground-palette: (
 $light-theme-background-palette: (
     status-bar: map.get($grey-palette, 300),
     app-bar: map.get($grey-palette, 100),
-    background: #fafbfc,
+    background: #f2f2f2,
     hover: rgba(black, 0.04),
     card: white,
     dialog: white,
@@ -120,6 +121,7 @@ $theme: (
 
 @include mat.all-component-themes($theme);
 @include login.theme($theme);
+@include signup.theme($theme);
 
 $dark-theme-foreground-palette: (
     base: white,
@@ -173,6 +175,7 @@ $dark-theme: (
 .dark-theme {
     @include mat.all-component-colors($dark-theme);
     @include login.theme($dark-theme);
+    @include signup.theme($dark-theme);
 }
 
 // Typography
