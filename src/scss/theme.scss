@@ -1,7 +1,8 @@
-@use 'node_modules/@angular/material/index' as mat;
+@use '@angular/material' as mat;
 @use 'sass:map';
 
 // Component themes
+@use './src/app/modules/login/login.component.theme' as login;
 
 // Variables
 @use 'variables' as *;
@@ -118,6 +119,7 @@ $theme: (
 );
 
 @include mat.all-component-themes($theme);
+@include login.theme($theme);
 
 $dark-theme-foreground-palette: (
     base: white,
@@ -170,6 +172,7 @@ $dark-theme: (
 
 .dark-theme {
     @include mat.all-component-colors($dark-theme);
+    @include login.theme($dark-theme);
 }
 
 // Typography
