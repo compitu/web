@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {Actions, createEffect, ofType, OnInitEffects} from '@ngrx/effects';
 import {Action, createAction, Store} from '@ngrx/store';
 import {catchError, map, of, switchMap, tap} from 'rxjs';
+import {signOutClick} from '../../modules/home/home.actions';
 import {loginFormSubmit} from '../../modules/login/login.actions';
 import {signupFormSubmit} from '../../modules/sign-up/signup.actions';
 import {
@@ -93,76 +94,20 @@ export class AuthEffects implements OnInitEffects {
         );
     });
 
-    public ngrxOnInitEffects(): Action {
-        return onInit();
-    }
-
-    /*public login$ = createEffect(() => {
-        return this.actions$.pipe(
-            ofType(loginFormSubmit, registerSuccess),
-            switchMap(action =>
-                this.authService.login(action.email, action.password).pipe(
-                    map(data => {
-                        this.cookieService.put('access', data.access);
-                        this.cookieService.put('refresh', data.refresh);
-                        return loginSuccess();
-                    }),
-                    catchError(() => of(loginFail()))
-                )
-            )
-        );
-    });
-
-    public fetchUserOnInit$ = createEffect(() => {
-        return this.actions$.pipe(
-            ofType(onInit),
-            switchMap(() => this.authService.user$),
-            map(user => userFetchSuccess({user})),
-            catchError(() => of(userFetchFail()))
-        );
-    });
-
-    public fetchUserOnLogin$ = createEffect(() => {
-        return this.actions$.pipe(
-            ofType(loginSuccess),
-            switchMap(() => this.authService.user$),
-            map(user => userFetchSuccess({user}))
-        );
-    });
-
-    public logOut$ = createEffect(
+    public signOut$ = createEffect(
         () => {
             return this.actions$.pipe(
-                ofType(logOutClick),
-                switchMap(() =>
-                    this.authService.logOut().pipe(
-                        map(() => {
-                            this.cookieService.remove('access');
-                            this.cookieService.remove('refresh');
-                        })
-                    )
-                )
+                ofType(signOutClick),
+                tap(() => {
+                    this.authService.clearTokens();
+                    this.router.navigateByUrl('/login');
+                })
             );
         },
         {dispatch: false}
     );
 
-    public register$ = createEffect(() => {
-        return this.actions$.pipe(
-            ofType(registerFormSubmit),
-            switchMap(action =>
-                this.authService
-                    .register(action.email, action.password, action.name)
-                    .pipe(
-                        map(() =>
-                            registerSuccess({
-                                email: action.email,
-                                password: action.password,
-                            })
-                        ),
-                        catchError(() => of(registerFail()))
-                    )
-            )
-        );
-    });*/
+    public ngrxOnInitEffects(): Action {
+        return onInit();
+    }
 }
