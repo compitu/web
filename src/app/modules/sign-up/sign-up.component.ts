@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Store} from '@ngrx/store';
-import {signupFormSubmit} from './signup.actions';
+import {signUpFormSubmit} from './sign-up.actions';
 
 @Component({
     selector: 'app-sign-up',
@@ -11,16 +11,16 @@ import {signupFormSubmit} from './signup.actions';
 export class SignUpComponent {
     public constructor(private store: Store) {}
 
-    public signupForm: FormGroup = new FormGroup({
+    public signUpForm: FormGroup = new FormGroup({
         email: new FormControl('', [Validators.required, Validators.email]),
         password: new FormControl('', [Validators.required]),
     });
 
-    public onSignupSubmit(): void {
+    public onSignUpSubmit(): void {
         this.store.dispatch(
-            signupFormSubmit({
-                email: this.signupForm.controls.email.value,
-                password: this.signupForm.controls.password.value,
+            signUpFormSubmit({
+                email: this.signUpForm.controls.email.value,
+                password: this.signUpForm.controls.password.value,
             })
         );
     }

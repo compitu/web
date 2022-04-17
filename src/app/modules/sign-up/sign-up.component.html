@@ -1,4 +1,4 @@
-<form novalidate [formGroup]="signupForm" (ngSubmit)="onSignupSubmit()">
+<form novalidate [formGroup]="signUpForm" (ngSubmit)="onSignUpSubmit()">
 
     <mat-form-field appearance="outline">
         <mat-label>E-mail</mat-label>
@@ -14,7 +14,7 @@
         mat-flat-button
         color="primary"
         type="submit"
-        [disabled]="!signupForm.valid"
+        [disabled]="!signUpForm.valid"
     >
         Sign up
     </button>

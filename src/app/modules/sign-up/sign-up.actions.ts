@@ -1,6 +1,6 @@
 import {createAction, props} from '@ngrx/store';
 
-export const signupFormSubmit = createAction(
-    '[Signup Component] Signup Form submit',
+export const signUpFormSubmit = createAction(
+    '[SignUp Component] Sign Up Form submit',
     props<{email: string; password: string}>()
 );

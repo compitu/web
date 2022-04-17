@@ -5,7 +5,7 @@ import {Action, createAction, Store} from '@ngrx/store';
 import {catchError, map, of, switchMap, tap} from 'rxjs';
 import {signOutClick} from '../../modules/home/home.actions';
 import {loginFormSubmit} from '../../modules/login/login.actions';
-import {signupFormSubmit} from '../../modules/sign-up/signup.actions';
+import {signUpFormSubmit} from '../../modules/sign-up/sign-up.actions';
 import {
     initUserFetchFail,
     initUserFetchSuccess,
@@ -81,7 +81,7 @@ export class AuthEffects implements OnInitEffects {
 
     public signup$ = createEffect(() => {
         return this.actions$.pipe(
-            ofType(signupFormSubmit),
+            ofType(signUpFormSubmit),
             switchMap(action =>
                 this.authService.signup(action.email, action.password).pipe(
                     map(() => ({
