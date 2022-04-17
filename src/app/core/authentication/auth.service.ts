@@ -1,6 +1,6 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {catchError, Observable} from 'rxjs';
+import {Observable} from 'rxjs';
 import {LoginPayload} from './login-payload';
 import {User} from './user';
 
@@ -20,7 +20,6 @@ export class AuthService {
     }
 
     public storeTokens(tokens: {access: string; refresh: string}): void {
-        console.log('store tokens');
         localStorage.setItem('access', tokens.access);
         localStorage.setItem('refresh', tokens.refresh);
     }
@@ -51,7 +50,7 @@ export class AuthService {
         });
     }
 
-    public logout(): void {
+    public clearTokens(): void {
         localStorage.removeItem('access');
         localStorage.removeItem('refresh');
         localStorage.removeItem('user');
@@ -60,11 +59,6 @@ export class AuthService {
     public fetchUser(): Observable<User | undefined> {
         const userString = localStorage.getItem('user');
         const user = userString ? (JSON.parse(userString) as User) : undefined;
-        return this.http.get<User>(`api/users/${user?.id}`).pipe(
-            catchError(err => {
-                console.log('ERROR');
-                throw err;
-            })
-        );
+        return this.http.get<User>(`api/users/${user?.id}`);
     }
 }

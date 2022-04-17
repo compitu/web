@@ -24,7 +24,6 @@ export class AuthGuard implements CanActivate {
     ): Observable<boolean> {
         return this.authService.fetchUser().pipe(
             map(user => {
-                console.log(user);
                 if (user) {
                     return true;
                 }
@@ -32,7 +31,6 @@ export class AuthGuard implements CanActivate {
                 return false;
             }),
             catchError(err => {
-                console.log(err);
                 this.router.navigate(['/login']);
                 return of(false);
             })

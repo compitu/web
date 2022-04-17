@@ -39,14 +39,14 @@ export class AuthInterceptor implements HttpInterceptor {
                         return this.refreshToken(req, next, refreshToken);
                     }
                     // otherwise logout
-                    this.authService.logout();
+                    this.authService.clearTokens();
                     throw err;
                 }
 
                 // in case of 403 http error (refresh token failed)
                 if (err instanceof HttpErrorResponse && err.status === 403) {
                     // logout
-                    this.authService.logout();
+                    this.authService.clearTokens();
                     throw err;
                 }
                 // if error has status neither 401 nor 403 then just return this error
