@@ -16,6 +16,24 @@ export class LoginComponent {
         password: new FormControl('', [Validators.required]),
     });
 
+    public getEmailErrorMessage(): string {
+        const emailControl = this.loginForm.get('email');
+        if (emailControl?.hasError('required')) {
+            return 'You must enter a value';
+        }
+
+        return emailControl?.hasError('email') ? 'Not a valid email' : '';
+    }
+
+    public getPasswordErrorMessage(): string {
+        const passwordControl = this.loginForm.get('password');
+        if (passwordControl?.hasError('required')) {
+            return 'You must enter a value';
+        }
+
+        return '';
+    }
+
     public onLoginSubmit(): void {
         this.store.dispatch(
             loginFormSubmit({
