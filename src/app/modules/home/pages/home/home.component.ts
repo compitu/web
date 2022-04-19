@@ -8,9 +8,15 @@ import {signOutClick} from './home.component.actions';
     styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
+    public sidenavOpened = true;
+
     public constructor(private store: Store) {}
 
     public onSignOutClick(): void {
         this.store.dispatch(signOutClick());
+    }
+
+    public onSidenavToggleClick(): void {
+        this.sidenavOpened = !this.sidenavOpened;
     }
 }
