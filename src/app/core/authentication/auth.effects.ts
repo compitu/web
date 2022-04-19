@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {Actions, createEffect, ofType, OnInitEffects} from '@ngrx/effects';
 import {Action, createAction, Store} from '@ngrx/store';
 import {catchError, map, of, switchMap, tap} from 'rxjs';
-import {signOutClick} from '../../modules/home/pages/home/home.component.actions';
+import {signOutClick} from '../../modules/home/components/content/content.component.actions';
 import {loginFormSubmit} from '../../modules/login/login.component.actions';
 import {signUpFormSubmit} from '../../modules/sign-up/sign-up.component.actions';
 import {
