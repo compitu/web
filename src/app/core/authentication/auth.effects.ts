@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {Actions, createEffect, ofType, OnInitEffects} from '@ngrx/effects';
 import {Action, createAction, Store} from '@ngrx/store';
 import {catchError, map, of, switchMap, tap} from 'rxjs';
-import {signOutClick} from '../../modules/home/components/content/content.component.actions';
+import {logOutClick} from '../../modules/home/components/toolbar/toolbar.component.actions';
 import {loginFormSubmit} from '../../modules/login/login.component.actions';
 import {signUpFormSubmit} from '../../modules/sign-up/sign-up.component.actions';
 import {
@@ -115,7 +115,7 @@ export class AuthEffects implements OnInitEffects {
     public signOut$ = createEffect(
         () => {
             return this.actions$.pipe(
-                ofType(signOutClick),
+                ofType(logOutClick),
                 tap(() => {
                     this.authService.clearTokens();
                     this.router.navigateByUrl('/login');

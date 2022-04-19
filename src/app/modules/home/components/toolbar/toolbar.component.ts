@@ -1,4 +1,6 @@
 import {Component, EventEmitter, Output} from '@angular/core';
+import {Store} from '@ngrx/store';
+import {logOutClick} from './toolbar.component.actions';
 
 @Component({
     selector: 'app-toolbar',
@@ -8,4 +10,10 @@ import {Component, EventEmitter, Output} from '@angular/core';
 export class ToolbarComponent {
     @Output()
     public sidenavToggleClick: EventEmitter<void> = new EventEmitter();
+
+    public constructor(private store: Store) {}
+
+    public onLogOutClick(): void {
+        this.store.dispatch(logOutClick());
+    }
 }
