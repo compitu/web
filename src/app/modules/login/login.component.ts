@@ -1,6 +1,9 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Store} from '@ngrx/store';
+import {map} from 'rxjs/operators';
+import {AuthError} from '../../core/authentication/auth-error';
+import {selectError} from '../../core/authentication/auth.reducer';
 import {loginFormSubmit} from './login.actions';
 
 @Component({
@@ -9,6 +12,18 @@ import {loginFormSubmit} from './login.actions';
     styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
+    public authError$ = this.store.select(selectError).pipe(
+        map(error => {
+            if (error === AuthError.UNAUTHORIZED) {
+                return 'You have entered wrong email or password.';
+            }
+            if (error === AuthError.UNKNOWN) {
+                return 'Something went wrong. Try again later.';
+            }
+            return error;
+        })
+    );
+
     public constructor(private store: Store) {}
 
     public loginForm: FormGroup = new FormGroup({

@@ -27,7 +27,24 @@
     font-weight: bold;
 }
 
+.login-errors {
+    margin: $space-xl 0 $space-xxl 0;
+    min-height: 20px;
+
+    mat-icon {
+        margin-right: $space-xs;
+        height: 18px;
+        font-size: 18px;
+        width: 18px;
+    }
+
+    div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
 .signup-text {
-    margin-top: $space-3xl;
     align-self: center;
 }

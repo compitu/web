@@ -29,6 +29,10 @@
         Login
     </button>
 
+    <div class="login-errors">
+        <div *ngIf="(authError$ | async) as error"><mat-icon fontSet="material-icons-round">error</mat-icon><span>{{ error }}</span></div>
+    </div>
+
     <div class="signup-text">Don't Have an Account? <a [routerLink]="['/signup']">Sign up</a></div>
 
 </form>

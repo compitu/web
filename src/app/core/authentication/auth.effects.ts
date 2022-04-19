@@ -10,6 +10,8 @@ import {
     initUserFetchFail,
     initUserFetchSuccess,
     loginPayloadFetchSuccess,
+    loginUnauthorized,
+    loginUnknownError,
     signupSuccess,
 } from './auth.effects.actions';
 import {AuthService} from './auth.service';
@@ -31,7 +33,13 @@ export class AuthEffects implements OnInitEffects {
             switchMap(action =>
                 this.authService.login(action.email, action.password)
             ),
-            map(payload => loginPayloadFetchSuccess({payload}))
+            map(payload => loginPayloadFetchSuccess({payload})),
+            catchError(err => {
+                if (err.status === 401 || err.status === 404) {
+                    return of(loginUnauthorized());
+                }
+                return of(loginUnknownError());
+            })
         );
     });
 
