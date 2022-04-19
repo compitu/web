@@ -1,5 +1,6 @@
 @use '@angular/material' as mat;
 @use 'sass:map';
+@use 'variables' as *;
 
 @mixin color($theme) {
     $color-config: mat.get-color-config($theme);
@@ -26,7 +27,7 @@
         color: mat.get-color-from-palette($primary-palette, 600);
     }
 
-    @media only screen and (max-width: 560px) {
+    @media only screen and (max-width: $bp-mobile) {
         app-sign-up {
             background-color: mat.get-color-from-palette(
                 $background-palette,

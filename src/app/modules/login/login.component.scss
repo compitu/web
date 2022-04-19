@@ -52,7 +52,7 @@
     align-self: center;
 }
 
-@media only screen and (max-width: 560px) {
+@media only screen and (max-width: $bp-mobile) {
     .login-form {
         padding: 0;
         width: 80%;
