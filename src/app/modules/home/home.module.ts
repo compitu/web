@@ -5,6 +5,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {RouterModule} from '@angular/router';
+import {ToolbarComponent} from './components/toolbar/toolbar.component';
 import {HomeRoutingModule} from './home-routing.module';
 import {HomeComponent} from './pages/home/home.component';
 
@@ -18,7 +19,7 @@ import {HomeComponent} from './pages/home/home.component';
         RouterModule,
         HomeRoutingModule,
     ],
-    declarations: [HomeComponent],
+    declarations: [HomeComponent, ToolbarComponent],
     exports: [HomeComponent],
 })
 export class HomeModule {}
