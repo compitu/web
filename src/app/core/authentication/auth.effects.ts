@@ -13,6 +13,8 @@ import {
     loginUnauthorized,
     loginUnknownError,
     signupSuccess,
+    signupUnknownError,
+    signupUserExist,
 } from './auth.effects.actions';
 import {AuthService} from './auth.service';
 
@@ -93,13 +95,20 @@ export class AuthEffects implements OnInitEffects {
             ofType(signUpFormSubmit),
             switchMap(action =>
                 this.authService.signup(action.email, action.password).pipe(
-                    map(() => ({
-                        email: action.email,
-                        password: action.password,
-                    }))
+                    map(() =>
+                        signupSuccess({
+                            email: action.email,
+                            password: action.password,
+                        })
+                    ),
+                    catchError(err => {
+                        if (err.status === 409) {
+                            return of(signupUserExist());
+                        }
+                        return of(signupUnknownError());
+                    })
                 )
-            ),
-            map(({email, password}) => signupSuccess({email, password}))
+            )
         );
     });
 

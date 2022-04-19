@@ -28,3 +28,9 @@ export const signupSuccess = createAction(
     '[Auth Effects] Signup Payload fetch success',
     props<{email: string; password: string}>()
 );
+
+export const signupUserExist = createAction('[Auth Effects] Signup User exist');
+
+export const signupUnknownError = createAction(
+    '[Auth Effects] Signup unknown error'
+);

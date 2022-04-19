@@ -2,8 +2,8 @@ import {Component, OnDestroy} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Store} from '@ngrx/store';
 import {map} from 'rxjs/operators';
-import {AuthError} from '../../core/authentication/auth-error';
-import {selectError} from '../../core/authentication/auth.reducer';
+import {selectLoginError} from '../../core/authentication/auth.reducer';
+import {LoginError} from '../../core/authentication/login-error';
 import {loginDestroy, loginFormSubmit} from './login.component.actions';
 
 @Component({
@@ -12,12 +12,12 @@ import {loginDestroy, loginFormSubmit} from './login.component.actions';
     styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnDestroy {
-    public authError$ = this.store.select(selectError).pipe(
+    public authError$ = this.store.select(selectLoginError).pipe(
         map(error => {
-            if (error === AuthError.UNAUTHORIZED) {
+            if (error === LoginError.UNAUTHORIZED) {
                 return 'You have entered wrong email or password.';
             }
-            if (error === AuthError.UNKNOWN) {
+            if (error === LoginError.UNKNOWN) {
                 return 'Something went wrong. Try again later.';
             }
             return error;

@@ -6,6 +6,8 @@
         alt="compitu logo"
     />
 
+    <h1 class="title mat-h2">Sign up</h1>
+
     <mat-form-field appearance="outline">
         <mat-label>E-mail</mat-label>
         <input matInput formControlName="email">
@@ -24,6 +26,10 @@
     >
         Sign up
     </button>
+
+    <div class="login-errors">
+        <div *ngIf="(authError$ | async) as error"><mat-icon fontSet="material-icons-round">error</mat-icon><span>{{ error }}</span></div>
+    </div>
 
     <div class="login-text">Already have an account? <a [routerLink]="['/login']">Log in</a></div>
 

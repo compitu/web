@@ -3,14 +3,20 @@ import {
     loginDestroy,
     loginFormSubmit,
 } from '../../modules/login/login.component.actions';
-import {AuthError} from './auth-error';
+import {
+    signUpDestroy,
+    signUpFormSubmit,
+} from '../../modules/sign-up/sign-up.component.actions';
 import {
     initUserFetchFail,
     initUserFetchSuccess,
     loginPayloadFetchSuccess,
     loginUnauthorized,
     loginUnknownError,
+    signupUserExist,
 } from './auth.effects.actions';
+import {LoginError} from './login-error';
+import {SignUpError} from './sign-up-error';
 
 export interface AuthState {
     initialized: boolean;
@@ -20,13 +26,15 @@ export interface AuthState {
               email: string;
           }
         | undefined;
-    error: AuthError | undefined;
+    loginError: LoginError | undefined;
+    signUpError: SignUpError | undefined;
 }
 
 export const initialState: AuthState = {
     initialized: false,
     user: undefined,
-    error: undefined,
+    loginError: undefined,
+    signUpError: undefined,
 };
 
 export const authFeature = createFeature({
@@ -47,15 +55,29 @@ export const authFeature = createFeature({
             };
         }),
         on(loginFormSubmit, loginDestroy, state => {
-            return {...state, error: undefined};
+            return {...state, loginError: undefined};
         }),
         on(loginUnauthorized, state => {
-            return {...state, error: AuthError.UNAUTHORIZED};
+            return {...state, loginError: LoginError.UNAUTHORIZED};
         }),
         on(loginUnknownError, state => {
-            return {...state, error: AuthError.UNKNOWN};
+            return {...state, loginError: LoginError.UNKNOWN};
+        }),
+        on(signUpFormSubmit, signUpDestroy, state => {
+            return {...state, signUpError: undefined};
+        }),
+        on(signupUserExist, state => {
+            return {...state, signUpError: SignUpError.USEREXISTS};
+        }),
+        on(loginUnknownError, state => {
+            return {...state, signUpError: SignUpError.UNKNOWN};
         })
     ),
 });
 
-export const {selectUser, selectAuthState, selectError} = authFeature;
+export const {
+    selectUser,
+    selectAuthState,
+    selectLoginError,
+    selectSignUpError,
+} = authFeature;
