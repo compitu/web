@@ -1,17 +1,17 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Store} from '@ngrx/store';
 import {map} from 'rxjs/operators';
 import {AuthError} from '../../core/authentication/auth-error';
 import {selectError} from '../../core/authentication/auth.reducer';
-import {loginFormSubmit} from './login.actions';
+import {loginDestroy, loginFormSubmit} from './login.component.actions';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnDestroy {
     public authError$ = this.store.select(selectError).pipe(
         map(error => {
             if (error === AuthError.UNAUTHORIZED) {
@@ -56,5 +56,9 @@ export class LoginComponent {
                 password: this.loginForm.controls.password.value,
             })
         );
+    }
+
+    public ngOnDestroy(): void {
+        this.store.dispatch(loginDestroy());
     }
 }

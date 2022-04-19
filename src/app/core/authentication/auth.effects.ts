@@ -4,7 +4,7 @@ import {Actions, createEffect, ofType, OnInitEffects} from '@ngrx/effects';
 import {Action, createAction, Store} from '@ngrx/store';
 import {catchError, map, of, switchMap, tap} from 'rxjs';
 import {signOutClick} from '../../modules/home/home.actions';
-import {loginFormSubmit} from '../../modules/login/login.actions';
+import {loginFormSubmit} from '../../modules/login/login.component.actions';
 import {signUpFormSubmit} from '../../modules/sign-up/sign-up.actions';
 import {
     initUserFetchFail,

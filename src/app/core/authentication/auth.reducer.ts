@@ -1,5 +1,8 @@
 import {createFeature, createReducer, on} from '@ngrx/store';
-import {loginFormSubmit} from '../../modules/login/login.actions';
+import {
+    loginDestroy,
+    loginFormSubmit,
+} from '../../modules/login/login.component.actions';
 import {AuthError} from './auth-error';
 import {
     initUserFetchFail,
@@ -43,7 +46,7 @@ export const authFeature = createFeature({
                 initialized: true,
             };
         }),
-        on(loginFormSubmit, state => {
+        on(loginFormSubmit, loginDestroy, state => {
             return {...state, error: undefined};
         }),
         on(loginUnauthorized, state => {
