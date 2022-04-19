@@ -1,7 +1,7 @@
 <mat-sidenav-container class="container">
-    <mat-sidenav class="sidenav" [opened]="sidenavOpened" mode="side">Start</mat-sidenav>
+    <mat-sidenav #sidenav class="sidenav" [opened]="true" [mode]="(sidenavMode$ | async) || 'side'">Start</mat-sidenav>
     <mat-sidenav-content>
-        <app-toolbar (sidenavToggleClick)="onSidenavToggleClick()"></app-toolbar>
+        <app-toolbar (sidenavToggleClick)="sidenav.toggle()"></app-toolbar>
         <p>home works!</p>
         <button mat-button [routerLink]="['/login']">Login</button>
         <button mat-button [routerLink]="['/signup']">Sign Up</button>

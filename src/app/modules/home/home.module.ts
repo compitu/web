@@ -1,3 +1,4 @@
+import {LayoutModule} from '@angular/cdk/layout';
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
@@ -16,6 +17,7 @@ import {HomeComponent} from './pages/home/home.component';
         MatSidenavModule,
         MatToolbarModule,
         MatIconModule,
+        LayoutModule,
         RouterModule,
         HomeRoutingModule,
     ],
