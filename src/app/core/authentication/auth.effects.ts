@@ -31,15 +31,16 @@ export class AuthEffects implements OnInitEffects {
         return this.actions$.pipe(
             ofType(loginFormSubmit, signupSuccess),
             switchMap(action =>
-                this.authService.login(action.email, action.password)
-            ),
-            map(payload => loginPayloadFetchSuccess({payload})),
-            catchError(err => {
-                if (err.status === 401 || err.status === 404) {
-                    return of(loginUnauthorized());
-                }
-                return of(loginUnknownError());
-            })
+                this.authService.login(action.email, action.password).pipe(
+                    map(payload => loginPayloadFetchSuccess({payload})),
+                    catchError(err => {
+                        if (err.status === 401 || err.status === 404) {
+                            return of(loginUnauthorized());
+                        }
+                        return of(loginUnknownError());
+                    })
+                )
+            )
         );
     });
 
