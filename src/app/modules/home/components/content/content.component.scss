@@ -1,0 +1,14 @@
+@use 'variables' as *;
+
+:host {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    padding-top: $space-xl;
+}
+
+.main-content {
+    display: flex;
+    flex: 1;
+    max-width: 400px;
+}

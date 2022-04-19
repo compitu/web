@@ -2,7 +2,7 @@
     <mat-sidenav #sidenav class="sidenav" [opened]="true" [mode]="(sidenavMode$ | async) || 'side'">
         <app-sidenav></app-sidenav>
     </mat-sidenav>
-    <mat-sidenav-content>
+    <mat-sidenav-content class="content">
         <app-toolbar (sidenavToggleClick)="sidenav.toggle()"></app-toolbar>
         <app-content></app-content>
     </mat-sidenav-content>
