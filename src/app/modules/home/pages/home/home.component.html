@@ -1,4 +1,9 @@
-<p>home works!</p>
-<button mat-button [routerLink]="['/login']">Login</button>
-<button mat-button [routerLink]="['/signup']">Sign Up</button>
-<button mat-button (click)="onSignOutClick()">Sign Out</button>
+<mat-sidenav-container class="container">
+    <mat-sidenav>Start</mat-sidenav>
+    <mat-sidenav-content>
+        <p>home works!</p>
+        <button mat-button [routerLink]="['/login']">Login</button>
+        <button mat-button [routerLink]="['/signup']">Sign Up</button>
+        <button mat-button (click)="onSignOutClick()">Sign Out</button>
+    </mat-sidenav-content>
+</mat-sidenav-container>
