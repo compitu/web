@@ -1,4 +1,5 @@
 @use 'variables' as *;
+@use '@angular/material' as mat;
 
 :host {
     display: flex;
@@ -14,6 +15,8 @@
     align-self: center;
     padding: $space-4xl $space-3xl;
     border-radius: $border-radius-default;
+
+    @include mat.elevation(24);
 }
 
 .logo {
@@ -47,4 +50,13 @@
 
 .login-text {
     align-self: center;
+}
+
+@media only screen and (max-width: 560px) {
+    .sign-up-form {
+        padding: 0;
+        width: 80%;
+
+        @include mat.elevation(0);
+    }
 }
