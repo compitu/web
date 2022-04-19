@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Store} from '@ngrx/store';
-import {signOutClick} from './home.actions';
+import {signOutClick} from './home.component.actions';
 
 @Component({
     selector: 'app-home',

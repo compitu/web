@@ -3,9 +3,9 @@ import {Router} from '@angular/router';
 import {Actions, createEffect, ofType, OnInitEffects} from '@ngrx/effects';
 import {Action, createAction, Store} from '@ngrx/store';
 import {catchError, map, of, switchMap, tap} from 'rxjs';
-import {signOutClick} from '../../modules/home/home.actions';
+import {signOutClick} from '../../modules/home/home.component.actions';
 import {loginFormSubmit} from '../../modules/login/login.component.actions';
-import {signUpFormSubmit} from '../../modules/sign-up/sign-up.actions';
+import {signUpFormSubmit} from '../../modules/sign-up/sign-up.component.actions';
 import {
     initUserFetchFail,
     initUserFetchSuccess,

@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Store} from '@ngrx/store';
-import {signUpFormSubmit} from './sign-up.actions';
+import {signUpFormSubmit} from './sign-up.component.actions';
 
 @Component({
     selector: 'app-sign-up',
