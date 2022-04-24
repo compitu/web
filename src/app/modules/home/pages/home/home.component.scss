@@ -9,6 +9,13 @@
 
 .sidenav {
     width: 300px;
+
+    ::ng-deep {
+        .mat-drawer-inner-container {
+            display: flex;
+            flex-direction: column;
+        }
+    }
 }
 
 .content {
