@@ -1,0 +1,11 @@
+<mat-selection-list [multiple]="false" class="main-list">
+    <mat-list-option
+        [routerLink]="[item.path]"
+        *ngFor="let item of viewData$ | async; trackBy: trackByFn"
+        [value]="item.name"
+        [selected]="item.selected"
+    >
+        <mat-icon matListIcon>{{ item.icon }}</mat-icon>
+        {{ item.name }}
+    </mat-list-option>
+</mat-selection-list>

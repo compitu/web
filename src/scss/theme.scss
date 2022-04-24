@@ -6,6 +6,8 @@
 @use './src/app/modules/sign-up/sign-up.component.theme' as signup;
 @use './src/app/modules/home/components/toolbar/toolbar.component.theme' as
     toolbar;
+@use './src/app/modules/home/components/sidenav/main-list/main-list.component.theme'
+    as mainList;
 
 // Variables
 @use 'variables' as *;
@@ -125,6 +127,7 @@ $theme: (
 @include login.theme($theme);
 @include signup.theme($theme);
 @include toolbar.theme($theme);
+@include mainList.theme($theme);
 
 $dark-theme-foreground-palette: (
     base: white,
@@ -180,6 +183,7 @@ $dark-theme: (
     @include login.theme($dark-theme);
     @include signup.theme($dark-theme);
     @include toolbar.theme($dark-theme);
+    @include mainList.theme($dark-theme);
 }
 
 // Typography

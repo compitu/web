@@ -1,0 +1,31 @@
+@use 'variables' as *;
+
+.main-list {
+    &.mat-list-base {
+        padding: 0 $space-l;
+    }
+
+    &.mat-list-base .mat-list-item,
+    &.mat-list-base .mat-list-option {
+        height: 34px !important;
+        border-radius: $border-radius-small;
+    }
+
+    .mat-ripple {
+        border-radius: $border-radius-small;
+    }
+
+    .mat-list-item-content {
+        padding: 0 $space-s !important;
+    }
+
+    .mat-icon {
+        font-size: $icon-size-sidenav !important;
+        width: $icon-size-sidenav !important;
+        height: $icon-size-sidenav !important;
+    }
+
+    .mat-list-text {
+        padding: 0 $space-s !important;
+    }
+}
